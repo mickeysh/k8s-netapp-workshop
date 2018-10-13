@@ -1,0 +1,1 @@
+aws ec2 describe-instances --filter "Name=tag:Name,Values=k8s-workshop" --query "Reservations[*].Instances[*].PublicIpAddress" --output=text

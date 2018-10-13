@@ -1,9 +1,11 @@
 {
     "version": 1,
     "storageDriverName": "ontap-nas",
+    "backendName": "nasflexvol", 
     "managementLIF": "172.31.1.47",
     "dataLIF": "172.31.1.150",
     "svm": "svm_SELab",
     "username": "admin",
-    "password": "Netapp1!"
+    "password": "Netapp1!",
+    "storagePrefix": "trident1"
 }
