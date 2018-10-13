@@ -1,0 +1,36 @@
+---
+- name: Install K8S master services
+  hosts: all
+  tasks:
+  
+    - name: K8S | Install Master | Initialize K8S with kubeadm
+      shell: kubeadm init --pod-network-cidr=192.168.10.0/24
+      become: true
+      become_method: sudo
+
+    - name: K8S | Install Master | Create .kube directory
+      file:
+        path: /home/ubuntu/.kube
+        state: directory
+
+    - name: K8S | Install Master | Copy admin.conf file to /.kube/config
+      shell: "cp -i /etc/kubernetes/admin.conf /home/ubuntu/.kube/config"
+      become: true
+      become_method: sudo
+
+    - name: K8S | Install Master | Change ownership on /.kube/config
+      file:
+        path: "/home/ubuntu/.kube/config"
+        owner: ubuntu
+        group: ubuntu
+      become: true
+      become_method: sudo
+
+    - name: K8S | Install Master | Install pod network
+      shell: kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/rbac-kdd.yaml
+    
+    - name: K8S | Install Master | Install pod network
+      shell: kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
+
+
+
