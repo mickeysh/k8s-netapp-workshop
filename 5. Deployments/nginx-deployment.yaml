@@ -10,7 +10,7 @@ metadata:
   name: nginx
   selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/nginx
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       run: nginx
